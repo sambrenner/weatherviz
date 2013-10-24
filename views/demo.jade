@@ -1,0 +1,17 @@
+extends layout
+
+block styles
+  link(rel="stylesheet", type="text/css", href="/css/demo.css")
+
+block scripts
+  case engine
+    when "paper"
+      script(type="text/javascript", src="/js/libs/paper-0.9.9.js")
+    when "three"
+      script(type="text/javascript", src="/js/libs/three.js")
+
+  script(type=(engine=="paper" ? "text/paperscript" : "text/javascript"), src="#{src}", canvas="canvas")
+
+block content
+  h1= name
+  canvas(id="canvas")

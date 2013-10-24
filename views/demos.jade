@@ -1,0 +1,5 @@
+block content
+  ul
+    each demo in demos
+      li
+        a(href="/demos/#{demo.name.toLowerCase()}")= demo.name
