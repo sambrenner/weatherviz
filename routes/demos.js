@@ -1,6 +1,7 @@
 var demos = {
-  'clouds': {name: 'Clouds', src: '/js/demos/clouds.js', engine: 'paper'},
-  'fog': {name: 'Fog', src: '/js/demos/fog.js', engine: 'paper'}
+  'clouds': {name: 'Clouds', src: '/js/demos/clouds.js', engine: 'three'},
+  'rain': {name: 'Rain', src: '/js/demos/rain.js', engine: 'three'},
+  'snow': {name: 'Snow', src: '/js/demos/snow.js', engine: 'three'}
 };
 
 exports.findAll = function(req,res) {

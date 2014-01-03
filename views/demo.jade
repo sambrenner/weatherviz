@@ -8,10 +8,22 @@ block scripts
     when "paper"
       script(type="text/javascript", src="/js/libs/paper-0.9.9.js")
     when "three"
-      script(type="text/javascript", src="/js/libs/three.js")
+      script(type="text/javascript", src="/js/libs/shaderparticle.js")
+      script(type="text/javascript", src="/js/libs/three.62.js")
+      
+      script(type="text/javascript", src="/js/libs/CopyShader.js")
+      script(type="text/javascript", src="/js/libs/EffectComposer.js")
+      script(type="text/javascript", src="/js/libs/RenderPass.js")
+      script(type="text/javascript", src="/js/libs/MaskPass.js")
+      script(type="text/javascript", src="/js/libs/ShaderPass.js")
+
+      script(type="text/javascript", src="/js/app/shaders/MosaicShader.js")
+      script(type="text/javascript", src="/js/libs/three.orbitcontrols.js")
+      script(type="text/javascript", src="/js/libs/three-setup.js")
 
   script(type=(engine=="paper" ? "text/paperscript" : "text/javascript"), src="#{src}", canvas="canvas")
 
 block content
   h1= name
   canvas(id="canvas")
+  div(id="container")
