@@ -45,8 +45,7 @@ demo.snow = (function(window,document) {
         }
       }
     }
-    
-  }
+  };
 
   return self;
 })(this,this.document);
@@ -54,6 +53,7 @@ demo.snow = (function(window,document) {
 $(document).ready(function() {
   $('body').css('background-color', '#444');
   demo.threesetup.init();
+  demo.threesetup.addComposer();
   demo.snow.init();
   demo.threesetup.animationFunction = demo.snow.animate;
 });

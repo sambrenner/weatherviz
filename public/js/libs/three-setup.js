@@ -3,9 +3,7 @@ demo.threesetup = (function(window,document) {
   var _scene, _camera, _renderer, _clock, _light, _controls, _composer;
 
   var _render = function() {
-    _renderer.render(_scene, _camera);
-
-    var gl = _renderer.domElement.getContext('webgl') || _renderer.domElement.getContext('experimental-webgl');
+    //_renderer.render(_scene, _camera);
     
     requestAnimationFrame(_render);
     _controls.update();
@@ -71,13 +69,22 @@ demo.threesetup = (function(window,document) {
     },
 
     addComposer: function() {
-      _composer = new THREE.EffectComposer(_renderer);
-      _composer.addPass( new THREE.RenderPass( _scene, _camera ) );
+      var renderTargetParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat, stencilBufer: false };
+      var renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, renderTargetParameters );
 
-      var effect = new THREE.ShaderPass( THREE.MosaicShader );
-      //effect.uniforms[ 'amount' ].value = 0.015;
-      effect.renderToScreen = true;
-      _composer.addPass( effect );
+      _composer = new THREE.EffectComposer(_renderer, renderTarget);
+      _composer.addPass( new THREE.RenderPass(_scene, _camera));
+
+      var mosaic = new THREE.ShaderPass(THREE.MosaicShader);
+      //mosaic.uniforms[ 'amount' ].value = 0.015;
+      //mosaic.renderToScreen = true;
+      _composer.addPass(mosaic);
+      
+      var edge = new THREE.ShaderPass(THREE.EdgeDetectionShader);
+      edge.uniforms['width'].value = window.innerWidth,
+      edge.uniforms['height'].value = window.innerHeight,
+      edge.renderToScreen = true;
+      _composer.addPass(edge);
     },
 
     animationFunction: null

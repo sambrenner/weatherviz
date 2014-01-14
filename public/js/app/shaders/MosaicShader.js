@@ -1,10 +1,9 @@
-
 THREE.MosaicShader = {
 
   uniforms: {
 
     "tDiffuse": { type: "t", value: null },
-    "size": { type: "f", value: 100.0 }
+    "size": { type: "f", value: 200.0 }
 
   },
 
