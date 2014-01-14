@@ -1,5 +1,6 @@
 html, body { height: 100%; width: 100%; }
+body { background-color: #F40; }
 canvas { height: 100%; width: 100%; }
-h1 { background-color: #f00; bottom: 10px; font-size: 130%; font-weight: bold; padding: 6px; position: absolute; right: 10px; }
+h1 { background-color: #f00; color: #fff; bottom: 10px; font-size: 130%; font-weight: bold; padding: 6px; position: absolute; right: 10px; z-index: 2; }
 
 #container, #canvas { position: absolute; top: 0; }
