@@ -47,7 +47,7 @@ var _clouds = [];
     init: function(wind) {
       var velocity = new THREE.Vector3(Math.random() * 1 - .5, 0, 0);
 
-      for (var i = 0; i < 1; i++) {
+      for (var i = 0; i < 20; i++) {
         _drawCloud(12, 10, 1, 30, 24, velocity, new THREE.Vector3(Math.random() * 3000 - 1500, 400, Math.random() * -500));
       };
     },
