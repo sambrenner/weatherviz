@@ -38,6 +38,7 @@ demo.rain = (function(window,document) {
 
 $(document).ready(function() {
   demo.threesetup.init();
+  demo.threesetup.addComposer();
   demo.rain.init();
   demo.threesetup.animationFunction = demo.rain.animate;
 });

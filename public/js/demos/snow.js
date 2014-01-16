@@ -51,7 +51,6 @@ demo.snow = (function(window,document) {
 })(this,this.document);
 
 $(document).ready(function() {
-  $('body').css('background-color', '#444');
   demo.threesetup.init();
   demo.threesetup.addComposer();
   demo.snow.init();

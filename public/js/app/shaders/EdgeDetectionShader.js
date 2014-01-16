@@ -32,6 +32,14 @@ THREE.EdgeDetectionShader = {
       "return texture2D(tDiffuse, coords + vec2(dx, dy));",
     "}",
 
+    "bool isCloud(in vec2 coords) {",
+      "if(get_pixel(coords,0.0,0.0).a == 0.0) {",
+        "return false;",
+      "} else {",
+        "return true;",
+      "}",
+    "}",
+
     "bool isEdge(in vec2 coords) {",
       "float dxtex = 1.0 / width;",
       "float dytex = 1.0 / height;",
@@ -54,7 +62,7 @@ THREE.EdgeDetectionShader = {
     "}",
 
     "void main() {",
-      "vec4 color = isEdge(vUv) ? vec4(0.0,0.0,0.0,1.0) : vec4(0.0,0.0,0.0,0.0);",
+      "vec4 color = isEdge(vUv) ? vec4(0.0,0.0,0.0,1.0) : (isCloud(vUv) ? vec4(1.0,1.0,1.0,1.0) : vec4(0.0,0.0,0.0,0.0));",
       "gl_FragColor = color;",
     "}"
 
