@@ -57,8 +57,8 @@ var _clouds = [];
 
       _clearClouds();
 
-      //var velocity = new THREE.Vector3(Math.random() * 1 - .5, 0, 0);
-      var velocity = new THREE.Vector3(10, 0, 0);
+      var velocity = new THREE.Vector3(Math.random() * 2 - 1, 0, 0);
+      //var velocity = new THREE.Vector3(10, 0, 0);
       
       var $this = $(this);
 
@@ -109,10 +109,7 @@ var _clouds = [];
         var cloud = _clouds[i];
         cloud.object.position.add(cloud.velocity);
 
-        //if off left, move off right
         if(cloud.object.position.x < -3000) cloud.object.position.x = 3000;
-
-        //if off right, move off left
         if(cloud.object.position.x > 3000) cloud.object.position.x = -3000;
       };
     },
