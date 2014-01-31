@@ -28,3 +28,20 @@ block content
   h1= name
   canvas(id="canvas")
   div(id="container")
+  
+  if name=="Clouds"
+    ul(id="cloud_type_picker")
+      li
+        a(href="#cumulus" class="active") cumulus
+      li
+        a(href="#cumulonimbus") cumulonimbus
+      li
+        a(href="#stratocumulus") stratocumulus
+      li
+        a(href="#altostratus") altostratus
+      li
+        a(href="#altocumulus") altocumulus
+      li
+        a(href="#cirrocumulus") cirrocumulus
+      li
+        a(href="#cirrus") cirrus

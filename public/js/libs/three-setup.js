@@ -68,6 +68,10 @@ demo.threesetup = (function(window,document) {
       _scene.add(obj);
     },
 
+    remove: function(obj) {
+      _scene.remove(obj);
+    },
+
     addComposer: function() {
       var renderTargetParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBAFormat, stencilBufer: false };
       var renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, renderTargetParameters );
