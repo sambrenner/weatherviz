@@ -7,4 +7,4 @@ h1 { background-color: #000; color: #fff; bottom: 10px; font-size: 130%; font-we
 
 #cloud_type_picker { background-color: #000; bottom: 10px; left: 10px; padding: 6px; position: absolute; }
 #cloud_type_picker a { color: #fff; }
-#cloud_type_picker .active { font-weight: bold; }
+#cloud_type_picker .active { color: #f30; }
