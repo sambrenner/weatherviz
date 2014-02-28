@@ -4,12 +4,12 @@ demo.threesetup = (function(window,document) {
   var _edgeShader, _mosaicShader;
 
   var _render = function() {
-    //_renderer.render(_scene, _camera);
-    
     requestAnimationFrame(_render);
     _controls.update();
 
     if(_composer) _composer.render();
+    else _renderer.render(_scene, _camera);
+    
     if(self.animationFunction) self.animationFunction(_clock.getDelta());
   };
 
@@ -93,8 +93,6 @@ demo.threesetup = (function(window,document) {
       _composer.addPass( new THREE.RenderPass(_scene, _camera));
 
       _mosaicShader = new THREE.ShaderPass(THREE.MosaicShader);
-      //mosaic.uniforms[ 'amount' ].value = 0.015;
-      //mosaic.renderToScreen = true;
       _composer.addPass(_mosaicShader);
       
       _edgeShader = new THREE.ShaderPass(THREE.EdgeDetectionShader);
