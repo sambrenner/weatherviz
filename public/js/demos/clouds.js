@@ -105,26 +105,27 @@ var _clouds = [];
 
   var _initCloudPicker = function() {
     $('#cloud_type_picker li a').on('click', function(e) {
-      e.preventDefault();
-
       _clearClouds();
 
-      var velocity = new THREE.Vector3(Math.random() * 2 - 1, 0, 0);
-      //var velocity = new THREE.Vector3(10, 0, 0);
-      
       var $this = $(this);
-
-      //eccentricity, xJaggedness, yJaggedness, multiplier, segments, velocity, position
 
       $('#cloud_type_picker li .active').removeClass('active');
       $this.addClass('active');
 
-      switch($this.attr('href').substr(1)) {
+      _generateCloudType($this.attr('href').substr(1));
+    });
+  };
+
+  var _generateCloudType = function(type) {
+    var velocity = new THREE.Vector3(Math.random() * 2 - 1, 0, 0);
+
+    switch(type) {
         case 'cumulus':
+          //eccentricity, xJaggedness, yJaggedness, multiplier, segments, velocity, position
           for (var i = 0; i < 15; i++) _drawEllipseCloud(6, 1, 1, 70, 18, velocity, new THREE.Vector3(Math.random() * 6000 - 3000, Math.random() * 200 + 200, Math.random() * -500));
           break;
         case 'cumulonimbus':
-        //baseXJaggedness, baseYJaggedness, baseMultiplier, arcXJaggedness, arcYJaggedness, arcMultiplier, arcEccentricity, segments, width, offset, velocity, position
+          //baseXJaggedness, baseYJaggedness, baseMultiplier, arcXJaggedness, arcYJaggedness, arcMultiplier, arcEccentricity, segments, width, offset, velocity, position
           for (var i = 0; i < 10; i++) _drawSemiCircleCloud(0, 5, 10, 0, 10, 20, 100, 10, 1000, 20, velocity, new THREE.Vector3(Math.random() * 6000 - 3000, Math.random() * 200, Math.random() * -500));
           break;
         case 'stratocumulus':
@@ -143,14 +144,16 @@ var _clouds = [];
           for (var i = 0; i < 30; i++) _drawEllipseCloud(50, 20, 1, 10, 24, velocity, new THREE.Vector3(Math.random() * 6000 - 3000, Math.random() * 200 + 200, Math.random() * -500));
           break;
       }
-    });
   };
 
   var self = {
-    init: function(wind) {
+    init: function() {
       _initCloudPicker();
 
-      $('#cloud_type_picker li a').first().click();
+      if(window.location.hash)
+        $('#cloud_type_picker li a:contains(' + window.location.hash.substr(1) + ')').click();
+      else
+        $('#cloud_type_picker li a').first().click();
     },
 
     createCloudLayer: function(base,oktas) {
