@@ -1,6 +1,7 @@
 var demo = demo || {};
 demo.threesetup = (function(window,document) {
   var _scene, _camera, _renderer, _clock, _light, _controls, _composer;
+  var _edgeShader, _mosaicShader;
 
   var _render = function() {
     //_renderer.render(_scene, _camera);
@@ -61,6 +62,18 @@ demo.threesetup = (function(window,document) {
       // attach the render-supplied DOM element
       $container.append(_renderer.domElement);
 
+      $(window).on('resize', function() {
+        _camera.aspect = window.innerWidth / window.innerHeight;
+        _camera.updateProjectionMatrix();
+
+        _renderer.setSize( window.innerWidth, window.innerHeight );
+
+        if(_edgeShader) {
+          _edgeShader.uniforms['width'].value = window.innerWidth;
+          _edgeShader.uniforms['height'].value = window.innerHeight;
+        }
+      });
+
       _render();
     },
 
@@ -79,16 +92,16 @@ demo.threesetup = (function(window,document) {
       _composer = new THREE.EffectComposer(_renderer, renderTarget);
       _composer.addPass( new THREE.RenderPass(_scene, _camera));
 
-      var mosaic = new THREE.ShaderPass(THREE.MosaicShader);
+      _mosaicShader = new THREE.ShaderPass(THREE.MosaicShader);
       //mosaic.uniforms[ 'amount' ].value = 0.015;
       //mosaic.renderToScreen = true;
-      _composer.addPass(mosaic);
+      _composer.addPass(_mosaicShader);
       
-      var edge = new THREE.ShaderPass(THREE.EdgeDetectionShader);
-      edge.uniforms['width'].value = window.innerWidth,
-      edge.uniforms['height'].value = window.innerHeight,
-      edge.renderToScreen = true;
-      _composer.addPass(edge);
+      _edgeShader = new THREE.ShaderPass(THREE.EdgeDetectionShader);
+      _edgeShader.uniforms['width'].value = window.innerWidth;
+      _edgeShader.uniforms['height'].value = window.innerHeight;
+      _edgeShader.renderToScreen = true;
+      _composer.addPass(_edgeShader);
     },
 
     animationFunction: null
