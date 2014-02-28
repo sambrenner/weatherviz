@@ -1,6 +1,7 @@
 var demo = demo || {};
 demo.clouds = (function(window,document) {
-var _clouds = [];
+  var _clouds = [];
+  var _lastTimeMouseMoved, _mouseMoveInterval;
 
   var _material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
@@ -103,6 +104,28 @@ var _clouds = [];
     _clouds = [];
   };
 
+  var _bindMouseActivityListener = function() {
+    // modified from https://stackoverflow.com/questions/17252532/execute-jquery-when-the-mouse-stops-moving
+
+    $(document).on('mousemove', function() {
+      $('#cloud_type_picker').fadeIn('slow');
+      $('h1').fadeIn('slow');
+
+      _lastTimeMouseMoved = new Date().getTime();
+      clearInterval(_mouseMoveInterval)
+
+      _mouseMoveInterval=setInterval(function(){
+        var currentTime = new Date().getTime();
+        if(currentTime - _lastTimeMouseMoved > 5000) {
+          $('#cloud_type_picker').fadeOut('slow');
+          $('h1').fadeOut('slow');
+        }
+      },1000);
+    });
+
+    $(document).trigger('mousemove');
+  };
+
   var _initCloudPicker = function() {
     $('#cloud_type_picker li a').on('click', function(e) {
       _clearClouds();
@@ -149,6 +172,7 @@ var _clouds = [];
   var self = {
     init: function() {
       _initCloudPicker();
+      _bindMouseActivityListener();
 
       if(window.location.hash)
         $('#cloud_type_picker li a:contains(' + window.location.hash.substr(1) + ')').click();
